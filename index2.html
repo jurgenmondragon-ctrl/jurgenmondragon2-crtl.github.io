@@ -39,7 +39,7 @@
          </header>
 <hr>
 <!-- Form starts here -->
-<form action="thankyou.html">
+<form name=" signup" id="signup" action="thankyou.html">      <!-- for later(review button)-->
       <center>
          <div class="format">
           <table>
@@ -55,8 +55,11 @@
                 <input type="text"              
                 id="fname"
                 name="fname"
+                minlength="1"
                 maxlength="30"
-                title="please enter your first name"
+                title="letters, dashes, and apostrophes only"
+                pattern="[a-zA-z']{1-30}"
+                onblur="validateMname()"
                 required
                 placeholder="Arthur"
                 />  
@@ -68,23 +71,32 @@
                 <input type="text"
                  id="mname"
                  name="mname"
+                 minlength="0"
                  maxlength="1"
-                 title="Please enter your middle initial" 
+                 title="letters only"
+                 pattern="[a-zA-z']{0-1}" 
+                 onblur="validateMname()"
                  placeholder="W"
                  />
           </td> 
         </tr>
+            <tr>
             <td class="td1"><label for="lname">Last name:</label></td>
-            <td>
+              <td>
                  <input type="text"
                    id="lname"
                    name="lname"
+                   minlength="1"
                    maxlength="30"
-                   title="Please enter your last name"
+                   title="letters, dashes, and apostrophes only"
+                   pattern="[a-zA-Z']{1-30}"
+                   onblur="validateLname()"
                    required
                    placeholder="Morgan"
                    />
-            </td>
+                  <br>
+                  <span class="error" id="lname-error"></span>
+              </td>
           </tr>
 
           <!--Gender or sex-->
@@ -121,27 +133,34 @@
 
           <tr>
              <td class="td1"><label for="dob">Date Of Birth</label></td>
-          <td>
-          <input 
-          type="date"
-          id="dob"
-          name="dob"
-          />  
+            <td>
+            <input 
+            type="date"
+            id="dob"
+            name="dob"
+            onblur="validateDob()"
+            required
+            />
+            <br>
+            <span class="error" id="dob-error"></span>
          </td>
       </tr>
 
     <tr>  <td class="td1"><label for="ssn">Social Security:</label></td>
         <td>
            <input 
-            type="password"
-             id="socialsec"
+              type="password"
+              id="socialsec"
               minlength="11"
-             maxlength="11"
+              maxlength="11"
               name="ssn"
               required
-             title="Please enter your social security number"
-             placeholder="123-12-1234"
+              title="only numbers for ssn"
+              placeholder="123-12-1234"
+              onblur="validateSsn()"
               />
+              <br>
+              <span class="error" id="ssn-error"></span>
         </td>
     </tr>
       
@@ -161,10 +180,13 @@
             name="address1" 
             id="address1"
             maxlength="40"
-            title="please enter your address"
+            title="letters, dashes, and apostrophes only"
             required
             placeholder=" Address"
+            onblur="validateAddress1()"
             />
+            <br>
+            <span class="error" id="address1-error"></span>
         </td>
       </tr>
       
@@ -176,7 +198,6 @@
             name=address2
             maxlength="40"
             title="please enter your address"
-            required
             placeholder=" Address"
             > 
         </td>
@@ -188,11 +209,15 @@
          <input type="text"
           id="city"
            name=city
+           minlength="1"
            maxlength="40"
            title="Please enter your city of residence"
            required
            placeholder="City"
+           onblur="validateCity()"
            />
+          <br>
+          <span class="error" id="city-error"></span>
         </td>
       </tr>
 
@@ -266,6 +291,7 @@
            title="please enter your zip code"
            required
            placeholder="ZIP"
+           onblur="validateZcode()"
            /> 
          </td>
     </tr>
@@ -280,7 +306,11 @@
                  maxlength="30"
                  title="Please enter your email"
                  placeholder="name@domain.tld"
+                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,20}$"
+                 onblur="validateEmail()"
                  /> 
+                 <br>
+                 <span class="error" id="email-error"></span>
               </td>
           </tr>
 
@@ -295,7 +325,10 @@
                  maxlength="12"
                  title="Please enter your Phone Number"
                  placeholder="123-456-7890"
+                 onblur="validatePhonenum()"
                  /> 
+                <br>
+                <span class="error" id="phonenum-error"></span>
               </td>
           </tr>
 
@@ -417,9 +450,12 @@
                  name="username"
                  maxlength="20"
                  required
-                 title="Please enter your username" 
+                 title="Username must have atleast 5 characters, and cant start with a number" 
                  placeholder="Ralph2222"
+                 onblur="validateUsername()"
                  />
+                 <br>
+                 <span class="error" id="username-error"></span>
             </td> 
            </tr>
 
@@ -433,9 +469,14 @@
                  maxlength="30"
                  minlength="10"
                  required
-                 title="Please enter password"
+                 title="password needs to have atleast 10 characters, one uppercase, one number, one lowercase and one special character"
                  placeholder="Password"
+                 onblur="validatePass()"
+                 oninput="validatePass()"
+                  onfocus="validatePass()"
                  />
+                 <br>
+                  <span class="error" id=pass1-error"></span>
             </td> 
            </tr>
 
@@ -451,7 +492,12 @@
                  required
                  title="Please re-enter password" 
                  placeholder="Password"
+                  onblur="confirmPass()"
+                  oninput="confirmPass()"
+                  onfocus="confirmPass()"
                  />
+                  <br>
+                  <span class="error" id=pass2-error"></span>
             </td> 
            </tr>
 
@@ -461,11 +507,29 @@
                      <input type="submit" name="submit" id="submit" style="font-family: 'Courier New', Courier, monospace;">
                      &nbsp;&nbsp;&nbsp; <!-- space-->
                      <input type="reset" name="reset" id="reset" style="font-family: 'Courier New', Courier, monospace;">
+                      &nbsp;&nbsp;&nbsp;
+                     <input type="button" name="review" id="review" value="review" style="font-family: 'optima', sans-serif;" onclick="reviewInput()"> 
                   </center>
                  </td>
              </tr>
          </table>
        </div>
+  <!-- something-->
+        <div class="pass-message">
+            <span id="msg1"></span> <br/>
+            <span id="msg2"></span> <br/>
+            <span id="msg3"></span> <br/>
+            <span id="msg4"></span> <br/>
+            <span id="msg5"></span> <br/>
+            <span id="msg6"></span> <br/>
+            <span id="msg7"></span> <br/>
+            <span id="pass2-error"></span> <br/>
+        </div>
+
+        <center>
+          <p id="showinput"></p>
+        </center>
+          
    </center>
 </form>
 
@@ -474,6 +538,6 @@
        <p id="footer"> &Silverlake Health Clinic | <a href="Paste.link.here" target="_blank" rel="noopener noreferrer">Contact Us!></a></p>
 </Footer>
 
-<script src="hw1.js"></script>
+<script src="hw2.js"></script>
       </body>
 </html>
