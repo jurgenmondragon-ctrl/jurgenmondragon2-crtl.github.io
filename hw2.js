@@ -114,7 +114,7 @@ function validateFname() {
       const ssnR =/^[0-9]{3}-?[0-9]{2}-?[0-9]{4}$/;
 
       if (!ssnR.test(ssn)) {
-         document.getElementById("ssn-Error").innerHMTL =
+         document.getElementById("ssn-error").innerHMTL =
          "please enter a valid social security number.";
          return false;
 
@@ -126,9 +126,247 @@ function validateFname() {
          document.getElementById("ssn-error").innerHTML = "";
          return true; 
       } 
-         
+   }
       
-       
+    // Address 1 validation 
+   function validateAddress() {
+      var ad1 = document.getElementById("address1").value;
+      console.log(ad1);
+      console.log(ad1.length);
+
+      if(ad1.length < 2) {
+         document.getElementById("address1-error").innerHTML =
+         "please enter your address on address line";
+         return false;
+      } else {
+          document.getElementById("address1-error").innerHTML ="";
+          return true;
+      }
+   }  
+   // city validation
+   function validateCity() {
+      city = document.getElementById("city").value.trim();
+
+      if(!city) {
+         document.getElementById("city-error").innerHTML = "city cannot be left blank"
+         return false;
+
+      } else { 
+         document.getElementById("city-error").innerHTML ="";
+         return true;
+      }
+   }
+
+   // zip code validation
+   function validateZcode() {
+      const zipInput = document.getElementById("zcode");
+      let zip = zipInput.value.replace(/[^\d-]/g,""); //removes any non-number and non-dash characters\
+
+      if(!zip) {
+         document.getElementById("zcode-error").innerHTML =
+            "zip code cant be blank";
+          return false;
+
+      }
+      if ( zip.length > 5) {
+         zip = zip.slice(0,5) + "-" + zip.slice(5,9); //gets rid of all digits after 5 numbers
+      } else { 
+         zip = zip.slice(0,5);
+      }
+
+      zipInput.value =zip; 
+      document.getElementById("zcode-error").innerHTML ="";
+      return true;
+   }
+}
+   // code for validating email
+   function validateEmail() {
+      email = document.getElementById("email").value;
+      var emailR=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; //regular expression pattern thing for email
+
+      if (email == "") {
+         document.getElementById("email-error).innerHTML =
+          "email address cant be empty;
+            return false;
+      } else if(!email.match(emailR)) {
+         document.getElementById("email-error).innerHTML =
+         "please enter a valid email address";
+         return false;
+      } else {
+         document.getElementById("email-error").innerHTML = "";
+         return true;
+      }
+
+   }
+    // validating phone number
+    function validatePhonenum() {
+       const  phoneInput = document.getElementById("phonenum");
+       const phone = phoneInput.value.replace(/\D/g,""); // removes all the non-number characters
+
+       if (phone.length !=30) {
+          document.getElementById("phonenum-error").innerHTML = 
+          "phone number cannot be left blank";
+           return false;
+       }
+
+       const formatteedPhone =
+       phone.slice(0,3) +"-"+ phone.slice(3,6) +"-"+ phone.slice(6,10)
+       phoneInput.value = formattedPhone;
+       documented.getElementById("phonenum-error").innerHTML = "";
+       return true;
+    }
+
+    // username validation
+    function validateUsername() {
+       username = document.getElementById("username").value;
+
+       //converts username to lowercase
+       username = username.toLowercase();
+
+       //display username in lowercase
+
+      document.getElementId("username").value = username;
+
+      if (username.length ===0) {
+         document.getElementById("username-error").innerHTML =
+         "username cant be empty";
+         return false;
+      }
+
+      //checks that username doesnt start with a number
+       if (!isNaN(username.charAt(0))){
+          document.getElementById("username-error").innerHTML =
+         "username cant be empty";
+          return false;
+       }
+
+       //checks if username is only made up of only letter, number and underscores
+       let regex = /^[a-zA-Z0-9]+$/;
+       if (!regex.test(username)) {
+          document.getElementById("username-error").innerHTML =
+          " "username can only have letters, numbers and underscores";
+          return false;
+          //checks if the entered username doesnt have 30 characters
+       } else if { (username.length < 5) {
+          document.getElementById("username-error").innerHTML =
+          "username cannot be less than 5 characters";
+          return false;
+       } else if { (username.length > 30) { 
+          document.getElementById("username-error").innerHMTL =
+          "username cant exceed 30 characters";
+          return false;
+       } else { //if all above is correct then
+          document.getElementById("username-error").innerHTML ="";
+          return true;
+       }
+   }
+            
+     // password validation  
+     function validatePass() {
+        const pass = document.getElementById("pass").value;
+        const username = document.getElementById("username").value;
+
+        //sets up and initializes array
+        const errorMessage == [];
+   
+       //checks lowercase
+        if(!pass.match(/[a-z]/)) {
+           errorMessage.push("enter at least one lowercase letter");
+        }
+        if(!pass.match(/[a-z]/)) {
+           errorMessage.push("enter at least one uppercase letter");
+        }
+        if(!pass.match(/[0-9]/)) {
+           errorMessage.push("enter at least one number");
+        }
+        if(!pass.match(/[!\@#\$%&*\-_\\.+\(\)]/)) {
+           errorMessage.push("enter at least one special character");
+        }
+        if(pass == username || pass.includes(username)) {
+           errorMessage.push("password cannot contain username");
+        }
+
+        const errorCounter = document.querySelector("pass-message");
+        errorContainer.innerHTML = errorMessage
+        .map(msg => '<span>${msg}</span><br>')
+        .join("");
+     }
+
+     // confirm password
+     function confirmPass() {
+        pass1 = document.getElementId("pass").value;
+        pass2 = document.getElementId("c_pass").value;
+
+      if (pass1 !== pass2) {
+         document.getElementById("pass2-error").innerHTML =
+         "passwords dont match";
+         return false;
+      } else { 
+         document.getElementById("pass2-error").innerHTML =
+         "password match";
+         return true;
+      }
+     }
+
+      // review button
+      function reviewInput() {
+         var formcontent = document.getElementById("signup");
+         var formoutput = <"table class ='output' ><tr><th colspan ='2'> Review Your Information:</th></tr>";
+
+         for (var i = 0; i <formcontent.elements.length; i++) {
+            var e1 = formcontent.elements[i];
+            var datatype = el.type;
+            var name = el.name;
+            var value = el.value;
+
+            //ignore elements with no name
+            if(!name) continue;
+
+            switch (datatype) {
+               case "checkbox":
+                  if (el.checked) {
+                     formoutput += "<tr><td align='right'>"+ name +"</td>";
+                     formoutput += "<td class='outputdata'>&#x2713;</td></tr>";
+                  }
+                  break;
+
+                case "radio":
+                  if (el.checked) {
+                     formoutput += "<tr><td align='right'>"+ name +"</td>";
+                     formoutput += "td class='outputdata'>" + value + "</td></tr>";
+                  }
+                  break;
+                  
+                  case "range":
+               
+                  if (value !== "0") {
+                     formoutput += "<tr><td align='right'>"+ name +"</td>";
+                     formoutput += "td class='outputdata'>" + value + "</td></tr>";
+                  }
+                  break;
+
+               case "button":
+               case "submit":
+               case "reset":
+                  //skip
+                  break;
+               default:
+                  if (value !== "") {
+                     formoutput += "<tr><td align='right'>" + name + "</td>";
+                     formoutput += "td class='outputdata'>" + value + "</td></tr>";
+                  }
+            }
+         }
+
+         formoutput += "</table>";
+         document.getElementById("showInput").innerHTML = formoutput;
+      }
+
+      // remove user input
+      function removeReview() {
+         document.getElementById("showInput").innerHTML ="";
+      }
+                     
        
     
     
