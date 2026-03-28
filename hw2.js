@@ -27,16 +27,16 @@ function validateFname() {
       return false;
    } else if (fname !="") {
        if (!fname.match(namePattern)) { //checks if the firstname matches the pattern
-          document.getElementById("fname error").innerHTML = "letters, apostrophes, and dashes only";
+          document.getElementById("fname-error").innerHTML = "letters, apostrophes, and dashes only";
           return false;
    } else if (fname.length < 2) { // checks if the first name has at least 2 characters
-         document.getElementById("fname error").innerHTML = "first name cannot be less than 2 characters.";  
+         document.getElementById("fname-error").innerHTML = "first name cannot be less than 2 characters.";  
           return false;
    } else if (fname.length > 30) { // checks if the first name is  more than 30 characters
-         document.getElementById("fname error").innerHTML = "first name cannot be more than 30 characters.";  
+         document.getElementById("fname-error").innerHTML = "first name cannot be more than 30 characters.";  
           return false;
    } else { 
-         document.getElementById("fname error").innerHTML = "";  
+         document.getElementById("fname-error").innerHTML = "";  
           return true;
        }
 
@@ -50,7 +50,7 @@ function validateFname() {
       mname = mname.toUpperCase();
       document.getElementById("mname").value =mname;
       if (!mname.match(namePattern)) { //checks if middle initial matches pattern
-         document.getElementById("mname-error).innerHTML = "middle initial has to be a single uppercase letter.";
+         document.getElementById("mname-error").innerHTML = "middle initial has to be a single uppercase letter.";
          return false;
       } else{
          document.getElementById("mname-error").innerHTML= "";
@@ -65,7 +65,7 @@ function validateFname() {
        var namePattern = /^[a-zA-Z']+$/;
        //checking if the field is empty
        if (lname == "") { 
-          document.getElementById("lname").innerHTML = "last name field cannot be empty";
+          document.getElementById("lname-error").innerHTML = "last name field cannot be empty";
           return false;
        }  else if(lname != "") { //check if last name matches the pattern
           if (!lname.match(namePattern)) {
@@ -86,17 +86,18 @@ function validateFname() {
     }
     
     // validating date of birth 
-    function validationDob() {
+    function validateDob() {
     dob = document.getElementById("dob");
     let date = new Date(dob.value);
-    let maxDate = new Date(dob.value);
+    let maxDate = new Date().setFullYear(new Date().getFullYear() -120);
 
     if (date > new Date()) {
-       document.getElementById("dob-error).innerHTML =
+       document.getElementById("dob-error").innerHTML =
        "Date cannot be in there.";
+       dob.value="";
        return false;
-    } else if( date < new Date(maxDate)) {
-       document.getElementById("dob-error).innerHTML =
+    } else if(date < new Date(maxDate)) {
+       document.getElementById("dob-error").innerHTML =
        "date cannot be more than 120 years ago.";
        dob.value="";
        return false;
@@ -106,24 +107,19 @@ function validateFname() {
     }
  }
        
- //Validating ssn
-   function validateSsn() {
-      const ssn = document.getElementById("ssn").value;
+ //Validating socialsec
+   function validateSocialsec() {
+      const socialsec = document.getElementById("socialsec").value;
 
-      // ssn patttern
-      const ssnR =/^[0-9]{3}-?[0-9]{2}-?[0-9]{4}$/;
+      // socialsec patttern
+      const socialsecR =/^[0-9]{3}-?[0-9]{2}-?[0-9]{4}$/;
 
-      if (!ssnR.test(ssn)) {
-         document.getElementById("ssn-error").innerHMTL =
+      if (!socialsecR.test(socialsec)) {
+         document.getElementById("socialsec-error").innerHTML =
          "please enter a valid social security number.";
          return false;
-
       } else {
-          document.getElementById("ssn-error").innerHTML = 
-           "please enter a valid social security number.";
-            return false; 
-      } else {
-         document.getElementById("ssn-error").innerHTML = "";
+         document.getElementById("socialsec-error").innerHTML = "";
          return true; 
       } 
    }
@@ -178,18 +174,18 @@ function validateFname() {
       document.getElementById("zcode-error").innerHTML ="";
       return true;
    }
-}
+
    // code for validating email
    function validateEmail() {
       email = document.getElementById("email").value;
       var emailR=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; //regular expression pattern thing for email
 
       if (email == "") {
-         document.getElementById("email-error).innerHTML =
-          "email address cant be empty;
+         document.getElementById("email-error").innerHTML =
+          "email address cant be empty";
             return false;
       } else if(!email.match(emailR)) {
-         document.getElementById("email-error).innerHTML =
+         document.getElementById("email-error").innerHTML =
          "please enter a valid email address";
          return false;
       } else {
@@ -203,16 +199,16 @@ function validateFname() {
        const  phoneInput = document.getElementById("phonenum");
        const phone = phoneInput.value.replace(/\D/g,""); // removes all the non-number characters
 
-       if (phone.length !=30) {
+       if (phone.length !=10) {
           document.getElementById("phonenum-error").innerHTML = 
           "phone number cannot be left blank";
            return false;
        }
 
-       const formatteedPhone =
+       const formattedPhone =
        phone.slice(0,3) +"-"+ phone.slice(3,6) +"-"+ phone.slice(6,10)
        phoneInput.value = formattedPhone;
-       documented.getElementById("phonenum-error").innerHTML = "";
+       document.getElementById("phonenum-error").innerHTML = "";
        return true;
     }
 
@@ -221,13 +217,13 @@ function validateFname() {
        username = document.getElementById("username").value;
 
        //converts username to lowercase
-       username = username.toLowercase();
+       username = username.toLowerCase();
 
        //display username in lowercase
 
-      document.getElementId("username").value = username;
+      document.getElementById("username").value = username;
 
-      if (username.length ===0) {
+      if (username.length === 0) {
          document.getElementById("username-error").innerHTML =
          "username cant be empty";
          return false;
@@ -244,15 +240,15 @@ function validateFname() {
        let regex = /^[a-zA-Z0-9]+$/;
        if (!regex.test(username)) {
           document.getElementById("username-error").innerHTML =
-          " "username can only have letters, numbers and underscores";
+          "username can only have letters, numbers and underscores";
           return false;
           //checks if the entered username doesnt have 30 characters
-       } else if { (username.length < 5) {
+       } else if (username.length < 5) {
           document.getElementById("username-error").innerHTML =
           "username cannot be less than 5 characters";
           return false;
-       } else if { (username.length > 30) { 
-          document.getElementById("username-error").innerHMTL =
+       } else if (username.length > 30) { 
+          document.getElementById("username-error").innerHTML =
           "username cant exceed 30 characters";
           return false;
        } else { //if all above is correct then
@@ -267,13 +263,13 @@ function validateFname() {
         const username = document.getElementById("username").value;
 
         //sets up and initializes array
-        const errorMessage == [];
+        const errorMessage = [];
    
        //checks lowercase
         if(!pass.match(/[a-z]/)) {
            errorMessage.push("enter at least one lowercase letter");
         }
-        if(!pass.match(/[a-z]/)) {
+        if(!pass.match(/[A-Z]/)) {
            errorMessage.push("enter at least one uppercase letter");
         }
         if(!pass.match(/[0-9]/)) {
@@ -286,16 +282,16 @@ function validateFname() {
            errorMessage.push("password cannot contain username");
         }
 
-        const errorCounter = document.querySelector("pass-message");
+        const errorContainer = document.querySelector(".pass-message");
         errorContainer.innerHTML = errorMessage
-        .map(msg => '<span>${msg}</span><br>')
+        .map(msg => `<span>${msg}</span><br>`)
         .join("");
      }
 
      // confirm password
      function confirmPass() {
-        pass1 = document.getElementId("pass").value;
-        pass2 = document.getElementId("c_pass").value;
+        pass1 = document.getElementById("pass").value;
+        pass2 = document.getElementById("c_pass").value;
 
       if (pass1 !== pass2) {
          document.getElementById("pass2-error").innerHTML =
@@ -311,10 +307,10 @@ function validateFname() {
       // review button
       function reviewInput() {
          var formcontent = document.getElementById("signup");
-         var formoutput = <"table class ='output' ><tr><th colspan ='2'> Review Your Information:</th></tr>";
+         var formoutput = "<table class ='output'><tr><th colspan ='2'>Review Your Information:</th></tr>";
 
          for (var i = 0; i <formcontent.elements.length; i++) {
-            var e1 = formcontent.elements[i];
+            var el = formcontent.elements[i];
             var datatype = el.type;
             var name = el.name;
             var value = el.value;
@@ -333,7 +329,7 @@ function validateFname() {
                 case "radio":
                   if (el.checked) {
                      formoutput += "<tr><td align='right'>"+ name +"</td>";
-                     formoutput += "td class='outputdata'>" + value + "</td></tr>";
+                     formoutput += "<td class='outputdata'>" + value + "</td></tr>";
                   }
                   break;
                   
@@ -341,7 +337,7 @@ function validateFname() {
                
                   if (value !== "0") {
                      formoutput += "<tr><td align='right'>"+ name +"</td>";
-                     formoutput += "td class='outputdata'>" + value + "</td></tr>";
+                     formoutput += "<td class='outputdata'>" + value + "</td></tr>";
                   }
                   break;
 
@@ -353,7 +349,7 @@ function validateFname() {
                default:
                   if (value !== "") {
                      formoutput += "<tr><td align='right'>" + name + "</td>";
-                     formoutput += "td class='outputdata'>" + value + "</td></tr>";
+                     formoutput += "<td class='outputdata'>" + value + "</td></tr>";
                   }
             }
          }
