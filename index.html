@@ -295,8 +295,10 @@
            title="please enter your zip code"
            required
            placeholder="ZIP"
-           onblur="validateZcode()"
-           /> 
+           onblur="validateZpcode()"
+           />
+          <br>
+          <span class="error" id="zpcode-error"></span>
          </td>
     </tr>
 
@@ -480,7 +482,7 @@
                   onfocus="validatePass()"
                  />
                  <br>
-                  <span class="error" id=pass1-error"></span>
+                  <span class="error" id="pass1-error"></span>
             </td> 
            </tr>
 
@@ -501,7 +503,7 @@
                   onfocus="confirmPass()"
                  />
                   <br>
-                  <span class="error" id=pass2-error"></span>
+                  <span class="error" id="pass2-error"></span>
             </td> 
            </tr>
 
@@ -531,7 +533,7 @@
         </div>
 
         <center>
-          <p id="showinput"></p>
+          <p id="showInput"></p>
         </center>
           
    </center>
