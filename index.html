@@ -59,10 +59,12 @@
                 maxlength="30"
                 title="letters, dashes, and apostrophes only"
                 pattern="[a-zA-z']{1-30}"
-                onblur="validateMname()"
+                onblur="validateFname()"
                 required
                 placeholder="Arthur"
-                />  
+                />
+                <br>
+                <span class="error" id="fname-error"></span>
             </td>
         </tr>
         <tr>
@@ -78,6 +80,8 @@
                  onblur="validateMname()"
                  placeholder="W"
                  />
+                 <br>
+                 <span class="error" id="mname-error"></span>
           </td> 
         </tr>
             <tr>
@@ -157,10 +161,10 @@
               required
               title="only numbers for ssn"
               placeholder="123-12-1234"
-              onblur="validateSsn()"
+              onblur="validateSocialsec()"
               />
               <br>
-              <span class="error" id="ssn-error"></span>
+              <span class="error" id="socialsec-error"></span>
         </td>
     </tr>
       
@@ -183,7 +187,7 @@
             title="letters, dashes, and apostrophes only"
             required
             placeholder=" Address"
-            onblur="validateAddress1()"
+            onblur="validateAddress()"
             />
             <br>
             <span class="error" id="address1-error"></span>
