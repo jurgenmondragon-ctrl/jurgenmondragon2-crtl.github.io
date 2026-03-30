@@ -41,6 +41,7 @@ function validateFname() {
        }
 
    }
+}
 
    //middle initial validation
    function validateMname() {
@@ -232,7 +233,7 @@ function validateFname() {
       //checks that username doesnt start with a number
        if (!isNaN(username.charAt(0))){
           document.getElementById("username-error").innerHTML =
-         "username cant be empty";
+         "username cant start with a number";
           return false;
        }
 
@@ -286,7 +287,6 @@ function validateFname() {
         errorContainer.innerHTML = errorMessage
         .map(msg => `<span>${msg}</span><br>`)
         .join("");
-        return errorMessage.length ===0;
      }
 
      // confirm password
