@@ -63,7 +63,7 @@ footer{
    bottom: 0;
    width: 100%;
    background-color: rgb(255,102,102);
-   height: 3.0 rem;
+   height: 3.0rem;
 }
 
 #footer{
@@ -105,11 +105,11 @@ p{
 }
 
 .error {
-   color: red
+   color: red;
    font-size: 12px;
-   font-family: "optima", sans serif;
+   font-family: "optima", sans-serif;
    font-weight: normal;
-{
+}
 
 .pass-message {
    text-align: right;
@@ -140,7 +140,7 @@ td.output {
 
 td.outputdata {
    width: 500px;
-   backlground-color: rgb(0,132,255);
+   background-color: rgb(0,132,255);
    padding: 10px;
    border-spacing: 2px;
 }
