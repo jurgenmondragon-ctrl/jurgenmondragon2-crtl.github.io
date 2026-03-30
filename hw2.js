@@ -155,12 +155,12 @@ function validateFname() {
    }
 
    // zip code validation
-   function validateZcode() {
-      const zipInput = document.getElementById("zcode");
+   function validateZpcode() {
+      const zipInput = document.getElementById("zpcode");
       let zip = zipInput.value.replace(/[^\d-]/g,""); //removes any non-number and non-dash characters\
 
       if(!zip) {
-         document.getElementById("zcode-error").innerHTML =
+         document.getElementById("zpcode-error").innerHTML =
             "zip code cant be blank";
           return false;
 
