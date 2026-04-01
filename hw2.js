@@ -290,19 +290,20 @@ function validateFname() {
      }
 
      // confirm password 
-     function confirmPass() {
-        pass1 = document.getElementById("pass").value;
-        pass2 = document.getElementById("c_pass").value;
-     }
-      if (pass1 !== pass2) {
-         document.getElementById("pass2-error").innerHTML =
-         "passwords dont match";
-         return false;
-      } else { 
-         document.getElementById("pass2-error").innerHTML =
-         "password match";
-         return true;
-      }
+    function confirmPass() {
+    pass1 = document.getElementById("pass").value;
+    pass2 = document.getElementById("c_pass").value;
+
+    if (pass1 !== pass2){
+        document.getElementById("pass2-error").innerHTML =
+        "Password do not match";
+        return false;
+    } else {
+        document.getElementById("pass2-error").innerHTML =
+        "Password match";
+        return true;
+    }
+}
      
 
       // review button
