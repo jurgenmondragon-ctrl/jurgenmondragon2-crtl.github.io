@@ -292,7 +292,7 @@ function validateFname() {
      // confirm password 
     function confirmPass() {
     pass1 = document.getElementById("pass").value;
-    pass2 = document.getElementById("c_pass").value;
+    pass2 = document.getElementById("retpass").value;
 
     if (pass1 !== pass2){
         document.getElementById("pass2-error").innerHTML =
