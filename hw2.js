@@ -1,8 +1,8 @@
 /*
    Name:Jurgen Mondragon
-   Date created:
-   Date modified:
-   Purpose: Homework 1 JS
+   Date created: 2/02/2026
+   Date modified: 3/31/2026
+   Purpose: Homework 2 JS
 */
 
 //dynamic date js code
