@@ -289,7 +289,7 @@ function validateFname() {
         .join("");
      }
 
-     // confirm password
+     // confirm password 
      function confirmPass() {
         pass1 = document.getElementById("pass").value;
         pass2 = document.getElementById("c_pass").value;
@@ -303,7 +303,7 @@ function validateFname() {
          "password match";
          return true;
       }
-     }
+     
 
       // review button
       function reviewInput() {
