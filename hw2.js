@@ -293,7 +293,7 @@ function validateFname() {
      function confirmPass() {
         pass1 = document.getElementById("pass").value;
         pass2 = document.getElementById("c_pass").value;
-
+     }
       if (pass1 !== pass2) {
          document.getElementById("pass2-error").innerHTML =
          "passwords dont match";
